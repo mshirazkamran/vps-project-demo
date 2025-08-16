@@ -1,0 +1,9 @@
+{
+    "tasks": [
+        "create a frontend folder in this project",
+        "create a backend folder in ths project",
+        "Use the uvicorn run command so you dont get issues when running from differnet dirs",
+        "Create a docker image if possible",
+        "Create nginx configs",
+    ] 
+}
