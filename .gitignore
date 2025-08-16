@@ -1,7 +1,22 @@
+# Virtual environment
 .venv/
+venv/
 
+# VSCode settings
 .vscode/
 
-src/__pycache__
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
 
+# SQLite DB
 src/db/todos.sqlite3
+
+# Logs
+*.log
+
+# Environment files
+.env
+*.env
