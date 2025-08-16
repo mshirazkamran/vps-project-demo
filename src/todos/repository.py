@@ -46,11 +46,12 @@ def delete_todo_by_id(id: int):
 
 def update_todo_by_id(id: int, todo: TodoUpdate):
     with get_connection() as conn:
-        cursor = conn.execute(
+        conn.execute(
             "UPDATE todo SET title =? , description = ?, completed = ? WHERE id = ?",
             (todo.title, todo.description, todo.completed, id),
         )
         conn.commit()
+        return conn.execute("SELECT * FROM todo WHERE id = ?", (id,)).fetchone()
 
 
 def create_todo(todo: TodoCreate):

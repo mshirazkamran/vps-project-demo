@@ -9,12 +9,12 @@ todos = APIRouter(prefix="/todos", tags=["todos"])
 
 
 @todos.get("/")
-async def get_all_todos():
+async def get_all_todos() -> list[Todo] | None:
     data = service.get_all_todos()
     if data is not None:
         return data
 
-    return {"content": "No todos present!"}
+    return None
 
 
 @todos.get("/{id}")
@@ -47,4 +47,4 @@ async def update_todo(todo: Annotated[TodoUpdate, Body()]) -> dict:
 async def delte_todo(id: Annotated[int, Query(ge=1, le=200)]) -> dict:
     status = service.delete_todo_by_id(id)
 
-    return {"deleted": True} if status == True else {"deleted": False}
+    return {"deleted": True} if status else {"deleted": False}
