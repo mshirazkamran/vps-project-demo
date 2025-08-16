@@ -3,7 +3,8 @@ import logging
 from contextlib import asynccontextmanager
 import uvicorn
 
-from . import service
+from .todos import service
+from src.todos import router
 
 # Configure logging
 logging.basicConfig(
@@ -30,6 +31,7 @@ app = FastAPI(
     lifespan=lifespan
 );
 
+app.include_router(router.todos)
 
 
 

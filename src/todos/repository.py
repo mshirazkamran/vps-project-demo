@@ -1,9 +1,9 @@
 import sqlite3
 from pathlib import Path
 
-from models import TodoUpdate, TodoCreate
+from .models import TodoUpdate, TodoCreate
 
-PATH = Path(__file__).parent / "db" / "todos.sqlite3"
+PATH = Path(__file__).parent.parent / "db" / "todos.sqlite3"
 
 def get_connection() -> sqlite3.Connection:
 
@@ -22,7 +22,7 @@ def init_db():
             CREATE TABLE IF NOT EXISTS todo (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 title TEXT NOT NULL,
-                decription TEXT NOT NULL,
+                description TEXT NOT NULL,
                 completed BOOLEAN NOT NULL CHECK (completed in (0,1))
             );                
             """);
@@ -42,10 +42,11 @@ def get_todo_by_id(id: int):
 
 def delete_todo_by_id(id: int):
     with get_connection() as conn:
-        conn.execute("DELETE FROM todo WHERE id = ?",
+        cursor = conn.execute("DELETE FROM todo WHERE id = ?",
                     (id,)
             )
         conn.commit()
+        return cursor.rowcount
 
 
 
@@ -55,11 +56,7 @@ def update_todo_by_id(id: int, todo: TodoUpdate):
                     (todo.title, todo.description, todo.completed, id)
             )
         conn.commit()
-        user_id =  cursor.lastrowid
-        if user_id is not None:
-            return get_todo_by_id(user_id)
-        
-        return None
+
         
 
 def create_todo(todo: TodoCreate):

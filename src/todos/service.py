@@ -1,5 +1,5 @@
-from models import Todo, TodoCreate, TodoUpdate
-import repository
+from .models import Todo, TodoCreate, TodoUpdate
+from . import repository
 import logging
 
 logger = logging.getLogger(__name__)
@@ -47,8 +47,8 @@ def create_todo(todo: TodoCreate) -> Todo | None:
     return None
 
 
-def update_todo_by_id(todo_id: int, todo: TodoUpdate) -> Todo | None:
-    row = repository.update_todo_by_id(todo_id, todo)
+def update_todo_by_id(id: int, todo: TodoUpdate) -> Todo | None:
+    row = repository.update_todo_by_id(id, todo)
     if row:
         logger.info("fetched rows from the database")
         return Todo(
@@ -61,8 +61,10 @@ def update_todo_by_id(todo_id: int, todo: TodoUpdate) -> Todo | None:
     return None
 
 
-def delete_todo_by_id(todo_id: int) -> None:
-    repository.delete_todo_by_id(todo_id)
+def delete_todo_by_id(todo_id: int) -> bool:
+    rows_deleted = repository.delete_todo_by_id(todo_id)
+    logger.info(f"{rows_deleted} have been deleted from the database" )
+    return True if rows_deleted == 1 else False
 
 
 def initialize_database() -> None:
