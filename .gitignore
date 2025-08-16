@@ -1,4 +1,7 @@
 .venv/
+
+.vscode/
+
 src/__pycache__
+
 src/db/todos.sqlite3
-.vscode
