@@ -7,13 +7,15 @@ from . import service
 
 # Configure logging
 logging.basicConfig(
-    level=logging.INFO,
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 )
 
 logger = logging.getLogger(__name__)
 
 
+# This runs for the first time only
+# code before yeild runs when the app starts
+# code after yield runs before the app is going to close
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     logger.info("initializing database...")

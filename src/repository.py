@@ -9,8 +9,8 @@ def get_connection() -> sqlite3.Connection:
 
     conn = sqlite3.connect(PATH)
     # to convert the returning entities from queries into an optimized object
-    # acces as following data[0], data[1] where 0 ,1 are columns (NOT PREFERRED)
-    # Access as following data['id'], data['decription'] 
+    # Usually we do following data[0], data[1] where 0 ,1 are columns (NOT PREFERRED)
+    # Access as following data['id'], data['decription'] through below optimization
     conn.row_factory = sqlite3.Row 
     return conn
 
@@ -62,7 +62,7 @@ def update_todo_by_id(id: int, todo: TodoUpdate):
         return None
         
 
-def insert_todo(todo: TodoCreate):
+def create_todo(todo: TodoCreate):
     with get_connection() as conn:
         cursor = conn.execute("INSERT INTO todo(title, description, completed) VALUES (?, ?, ?)",
                     (todo.title, todo.description, todo.completed)

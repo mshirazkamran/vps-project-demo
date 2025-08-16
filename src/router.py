@@ -1,4 +1,3 @@
-import random
 from fastapi import APIRouter, HTTPException, Path, Body
 from typing import Annotated
 
