@@ -1,6 +1,7 @@
 from uvicorn.config import LOGGING_CONFIG
 import logging.config
 
+
 def setup_logging():
     config = LOGGING_CONFIG.copy()
 
