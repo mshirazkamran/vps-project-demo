@@ -9,12 +9,15 @@ def get_all_todos() -> list[Todo] | None:
     rows = repository.get_all_todos()
     if rows:
         logger.info("fetched rows from the database")
-        return [Todo(
-            id=row['id'],
-            title=row['title'],
-            description=row['description'],
-            completed=bool(row['completed'])
-        ) for row in rows]
+        return [
+            Todo(
+                id=row["id"],
+                title=row["title"],
+                description=row["description"],
+                completed=bool(row["completed"]),
+            )
+            for row in rows
+        ]
     logger.info("could not fetch data from database")
     return None
 
@@ -24,10 +27,10 @@ def get_todo_by_id(todo_id: int) -> Todo | None:
     if row:
         logger.info("fetched rows from the database")
         return Todo(
-            id=row['id'],
-            title=row['title'],
-            description=row['description'],
-            completed=bool(row['completed'])
+            id=row["id"],
+            title=row["title"],
+            description=row["description"],
+            completed=bool(row["completed"]),
         )
     logger.info("could not fetch data from database")
     return None
@@ -38,10 +41,10 @@ def create_todo(todo: TodoCreate) -> Todo | None:
     if row:
         logger.info("fetched rows from the database")
         return Todo(
-            id=row['id'],
-            title=row['title'],
-            description=row['description'],
-            completed=bool(row['completed'])
+            id=row["id"],
+            title=row["title"],
+            description=row["description"],
+            completed=bool(row["completed"]),
         )
     logger.info("could not fetch data from database")
     return None
@@ -52,10 +55,10 @@ def update_todo_by_id(id: int, todo: TodoUpdate) -> Todo | None:
     if row:
         logger.info("fetched rows from the database")
         return Todo(
-            id=row['id'],
-            title=row['title'],
-            description=row['description'],
-            completed=bool(row['completed'])
+            id=row["id"],
+            title=row["title"],
+            description=row["description"],
+            completed=bool(row["completed"]),
         )
     logger.info("could not fetch data from database")
     return None
@@ -63,7 +66,7 @@ def update_todo_by_id(id: int, todo: TodoUpdate) -> Todo | None:
 
 def delete_todo_by_id(todo_id: int) -> bool:
     rows_deleted = repository.delete_todo_by_id(todo_id)
-    logger.info(f"{rows_deleted} have been deleted from the database" )
+    logger.info(f"{rows_deleted} have been deleted from the database")
     return True if rows_deleted == 1 else False
 
 
