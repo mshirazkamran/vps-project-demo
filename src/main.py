@@ -8,7 +8,6 @@ from src.logging.config import setup_logging
 from .todos import service
 from src.todos import router
 
-from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 
